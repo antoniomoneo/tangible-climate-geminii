@@ -1,11 +1,12 @@
 import React from 'react';
-import type { StorySegment, Language } from '../types';
+import type { StorySegment, Language, Choice } from '../types';
 import { ChartBarIcon } from './icons';
 import { locales } from '../locales';
+import SkeletonChart from './SkeletonChart';
 
 interface GameScreenProps {
   story: StorySegment;
-  onChoice: (choice: string) => void;
+  onChoice: (choice: Choice) => void;
   isLoading: boolean;
   language: Language;
 }
@@ -14,19 +15,23 @@ const GameScreen: React.FC<GameScreenProps> = ({ story, onChoice, isLoading, lan
   const t = locales[language];
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full max-w-7xl mx-auto p-4">
-      {/* Image Column */}
-      <div className="w-full aspect-video rounded-lg shadow-2xl bg-gray-800 border border-gray-700 overflow-hidden relative">
-        {isLoading && !story.image ? (
-            <div className="w-full h-full flex items-center justify-center">
-                <div className="animate-pulse text-gray-500">Loading image...</div>
-            </div>
+      {/* Visual Column */}
+      <div className="w-full aspect-video rounded-lg shadow-2xl bg-gray-800 border border-gray-700 overflow-hidden relative flex items-center justify-center p-4">
+        {story.chartConfig ? (
+          <SkeletonChart 
+            key={`${story.chartConfig.startYear}-${story.chartConfig.endYear}`}
+            startYear={story.chartConfig.startYear}
+            endYear={story.chartConfig.endYear}
+          />
+        ) : story.image ? (
+          <img 
+            key={story.image}
+            src={story.image} 
+            alt="Scene" 
+            className="w-full h-full object-contain animate-fadeIn" 
+          />
         ) : (
-            <img 
-              key={story.image}
-              src={story.image} 
-              alt="Scene" 
-              className="w-full h-full object-cover animate-fadeIn" 
-            />
+          <div className="text-gray-500">No visual available</div>
         )}
       </div>
 
@@ -55,7 +60,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ story, onChoice, isLoading, lan
                 <span className="mr-3 text-cyan-400 group-hover:text-white transition-colors">
                     <ChartBarIcon />
                 </span>
-                {choice}
+                {choice.text}
               </button>
             ))}
           </div>

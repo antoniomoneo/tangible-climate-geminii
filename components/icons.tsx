@@ -24,3 +24,31 @@ export const GlobeIcon: React.FC = () => (
       <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.707 4.293l.586-.586a2 2 0 012.828 0l2 2a2 2 0 010 2.828l-2 2a2 2 0 01-2.828 0l-.586-.586M12 22a10 10 0 110-20 10 10 0 010 20z" />
     </svg>
 );
+
+export const AuraIcon: React.FC<{ className?: string }> = ({ className = "h-8 w-8" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z" />
+        <path d="M12 12l-2 2.5 2 2.5 2-2.5-2-2.5z" />
+        <path d="M12 21.35V17" />
+    </svg>
+);
+
+export const DashboardIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+    </svg>
+);
+
+export const InfoIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+);
+
+export const TangibleDataLogo: React.FC<{ className?: string }> = ({ className = "h-6" }) => (
+     <svg className={className} viewBox="0 0 250 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tangible Data Logo">
+        <text x="0" y="18" fontFamily="'IBM Plex Mono', monospace" fontSize="20" fill="currentColor" fontWeight="500">
+            TANGIBLE DATA
+        </text>
+    </svg>
+);

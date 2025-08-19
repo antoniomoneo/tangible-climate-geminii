@@ -16,7 +16,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ finalScene, onRestart, 
         <h1 className="font-title text-6xl text-cyan-400 mb-4">{t.gameOverTitle}</h1>
         
         <div className="my-6">
-          <img src={finalScene.image} alt="Final Scene" className="w-full aspect-video object-cover rounded-lg shadow-lg mx-auto border-2 border-gray-600" />
+          <img src={finalScene.image} alt="Final Scene" className="w-full aspect-video object-contain rounded-lg shadow-lg mx-auto border-2 border-gray-600" />
         </div>
 
         <p className="text-gray-300 text-lg leading-relaxed mb-8">{finalScene.sceneDescription}</p>

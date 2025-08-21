@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenAI } from '@google/genai';
 import type { Language, ChatMessage } from '../types';
 import { locales } from '../locales';
 import { AuraIcon, UserIcon } from './icons';
@@ -46,51 +45,78 @@ const ChatModal: React.FC<ChatModalProps> = ({ isOpen, onClose, language, contex
     setError(null);
     
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      
-      const contentsForApi = currentHistory.map(msg => ({
-          role: msg.role,
-          parts: [{ text: msg.content }]
-      }));
-      
-      const lastUserMessage = contentsForApi[contentsForApi.length-1];
-      if (lastUserMessage.role === 'user') {
-          lastUserMessage.parts[0].text += `\n\nCurrent game context: "${context}"`;
-      }
-        
-      const stream = await ai.models.generateContentStream({
-        model: 'gemini-2.5-flash',
-        contents: contentsForApi,
-        config: {
+      const response = await fetch('/api/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          messages: currentHistory,
+          context: context,
           systemInstruction: t.chatSystemInstruction,
-        },
+         }),
       });
 
-      for await (const chunk of stream) {
-        const text = chunk.text;
-        if (text) {
-          setMessages(prev => {
-            const lastMessage = prev[prev.length - 1];
-            if (lastMessage?.role === 'model') {
-              const updatedMessages = [...prev];
-              updatedMessages[updatedMessages.length - 1] = {
-                ...lastMessage,
-                content: lastMessage.content + text,
-              };
-              return updatedMessages;
+      if (!response.ok) {
+        // More robust error handling: read the body once and try to parse it.
+        const errorText = await response.text(); // Read the body as text ONCE.
+        let serverError;
+        try {
+          // Try to parse the text as JSON.
+          const errorJson = JSON.parse(errorText);
+          serverError = errorJson.error || errorText; // Use the parsed error, or fall back to the full text.
+        } catch (e) {
+          // If parsing fails, the error is the raw text itself.
+          serverError = errorText;
+        }
+        // Throw an error with the specific message, or a generic one if the body was empty.
+        throw new Error(serverError || `HTTP error! status: ${response.status}`);
+      }
+      
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error('Failed to get response reader');
+      }
+
+      const decoder = new TextDecoder();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split('\n\n').filter(line => line.trim() !== '');
+        
+        for (const line of lines) {
+            if (line.startsWith('data: ')) {
+                try {
+                    const json = JSON.parse(line.substring(6));
+                    if (json.text) {
+                         setMessages(prev => {
+                            const lastMessage = prev[prev.length - 1];
+                            if (lastMessage?.role === 'model') {
+                              const updatedMessages = [...prev];
+                              updatedMessages[updatedMessages.length - 1] = {
+                                ...lastMessage,
+                                content: lastMessage.content + json.text,
+                              };
+                              return updatedMessages;
+                            }
+                            return prev;
+                          });
+                    }
+                } catch (e) {
+                    console.error('Failed to parse stream chunk:', line);
+                }
             }
-            return prev;
-          });
         }
       }
     } catch (e: any) {
-        console.error(e);
-        const errorMessage = t.chatNotConfigured;
+        console.error('Chat error:', e);
+        const errorMessage = e.message || t.chatNotConfigured;
         setError(errorMessage);
         setMessages(prev => {
            const newMessages = [...prev];
-           if (newMessages.length > 0 && newMessages[newMessages.length-1].role === 'model') {
-              newMessages[newMessages.length-1].content = errorMessage;
+           const lastMessage = newMessages[newMessages.length - 1];
+           if (lastMessage && lastMessage.role === 'model' && lastMessage.content === '') {
+              lastMessage.content = errorMessage;
            }
            return newMessages;
         });

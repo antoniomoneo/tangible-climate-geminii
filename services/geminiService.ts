@@ -1,1 +1,1 @@
-// This service is no longer used. AI chat functionality is handled by the /api/openai endpoint.
+// This file is no longer used and can be deleted. AI chat functionality has been moved to the client-side in ChatModal.tsx.

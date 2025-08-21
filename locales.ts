@@ -30,15 +30,6 @@ export const locales = {
     dashboardBack: "Back to Analysis",
     aboutTitle: "About The Project",
     aboutCredit: "An interactive experience by",
-    adminTitle: "Admin Configuration",
-    adminConfigTitle: "AURA Assistant Configuration",
-    adminApiKeyPrompt: "Please enter your OpenAI API Key and Assistant ID to enable the AURA chat assistant. Your credentials will be stored securely in your browser's local storage.",
-    adminApiKeyField: "OpenAI API Key",
-    adminAssistantIdField: "OpenAI Assistant ID",
-    adminSaveButton: "Save Credentials",
-    adminGoBackButton: "Go Back to App",
-    adminCloseButton: "Close",
-    adminSaveSuccess: "Credentials saved successfully!",
   },
   es: {
     title: "El Esqueleto del Cambio Climático",
@@ -66,15 +57,6 @@ export const locales = {
     dashboardBack: "Volver al Análisis",
     aboutTitle: "Sobre el Proyecto",
     aboutCredit: "Una experiencia interactiva de",
-    adminTitle: "Configuración de Administrador",
-    adminConfigTitle: "Configuración del Asistente AURA",
-    adminApiKeyPrompt: "Introduce tu clave de API de OpenAI y tu ID de asistente para habilitar el asistente de chat AURA. Tus credenciales se guardarán de forma segura en el almacenamiento local de tu navegador.",
-    adminApiKeyField: "Clave de API de OpenAI",
-    adminAssistantIdField: "ID de Asistente de OpenAI",
-    adminSaveButton: "Guardar Credenciales",
-    adminGoBackButton: "Volver a la App",
-    adminCloseButton: "Cerrar",
-    adminSaveSuccess: "¡Credenciales guardadas correctamente!",
   }
 };
 
@@ -248,7 +230,7 @@ const storyDataEs: StoryData = {
   },
   'period_1910_events': {
     id: 'period_1910_events',
-    sceneDescription: "Aunque eventos históricos importantes como la Primera Guerra Mundial y la Gran Depresión causaron caídas temporales en la actividad industrial y las emisiones en algunas regiones, no fueron lo suficientemente significativos como para detener la tendencia general de calentamiento impulsada por el crecimiento industrial a largo plazo.",
+    sceneDescription: "Aunque eventos históricos importantes como la Primera Guerra Mundial y la Gran Depresión causaron caídas temporales en la actividad industrial y las emisiones en algunas regions, no fueron lo suficientemente significativos como para detener la tendencia general de calentamiento impulsada por el crecimiento industrial a largo plazo.",
     chartConfig: { startYear: 1910, endYear: 1945 },
     choices: [
        { text: "Explorar otro período.", nextSceneId: "start" },

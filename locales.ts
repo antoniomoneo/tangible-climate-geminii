@@ -17,8 +17,11 @@ export const locales = {
     errorTitle: "An Error Occurred",
     errorTryAgain: "Try Again",
     chatTitle: "Chat with AURA",
-    chatPlaceholder: "Ask a question about the data...",
+    chatPlaceholder: "Ask AURA a question...",
     chatSend: "Send",
+    chatNotConfigured: "The AI assistant is currently unavailable. Please try again later.",
+    chatSystemInstruction: "You are AURA, a helpful scientific AI assistant guiding users through climate change data. Your answers should be concise, informative, and related to science, climate, and the data presented in the experience.",
+    chatLoading: "AURA is thinking...",
     headerDashboardButton: "Dashboard",
     headerChatButton: "AURA",
     headerAboutButton: "About",
@@ -27,6 +30,15 @@ export const locales = {
     dashboardBack: "Back to Analysis",
     aboutTitle: "About The Project",
     aboutCredit: "An interactive experience by",
+    adminTitle: "Admin Configuration",
+    adminConfigTitle: "AURA Assistant Configuration",
+    adminApiKeyPrompt: "Please enter your OpenAI API Key and Assistant ID to enable the AURA chat assistant. Your credentials will be stored securely in your browser's local storage.",
+    adminApiKeyField: "OpenAI API Key",
+    adminAssistantIdField: "OpenAI Assistant ID",
+    adminSaveButton: "Save Credentials",
+    adminGoBackButton: "Go Back to App",
+    adminCloseButton: "Close",
+    adminSaveSuccess: "Credentials saved successfully!",
   },
   es: {
     title: "El Esqueleto del Cambio Climático",
@@ -41,8 +53,11 @@ export const locales = {
     errorTitle: "Ocurrió un Error",
     errorTryAgain: "Intentar de Nuevo",
     chatTitle: "Chatea con AURA",
-    chatPlaceholder: "Haz una pregunta sobre los datos...",
+    chatPlaceholder: "Haz una pregunta a AURA...",
     chatSend: "Enviar",
+    chatNotConfigured: "El asistente de IA no está disponible actualmente. Por favor, inténtalo de nuevo más tarde.",
+    chatSystemInstruction: "Eres AURA, una asistente científica de IA que guía a los usuarios a través de los datos del cambio climático. Tus respuestas deben ser concisas, informativas y relacionadas con la ciencia, el clima y los datos presentados en la experiencia.",
+    chatLoading: "AURA está pensando...",
     headerDashboardButton: "Dashboard",
     headerChatButton: "AURA",
     headerAboutButton: "Acerca de",
@@ -51,6 +66,15 @@ export const locales = {
     dashboardBack: "Volver al Análisis",
     aboutTitle: "Sobre el Proyecto",
     aboutCredit: "Una experiencia interactiva de",
+    adminTitle: "Configuración de Administrador",
+    adminConfigTitle: "Configuración del Asistente AURA",
+    adminApiKeyPrompt: "Introduce tu clave de API de OpenAI y tu ID de asistente para habilitar el asistente de chat AURA. Tus credenciales se guardarán de forma segura en el almacenamiento local de tu navegador.",
+    adminApiKeyField: "Clave de API de OpenAI",
+    adminAssistantIdField: "ID de Asistente de OpenAI",
+    adminSaveButton: "Guardar Credenciales",
+    adminGoBackButton: "Volver a la App",
+    adminCloseButton: "Cerrar",
+    adminSaveSuccess: "¡Credenciales guardadas correctamente!",
   }
 };
 
@@ -231,18 +255,18 @@ const storyDataEs: StoryData = {
        { text: "Finalizar el análisis.", nextSceneId: "conclusion" },
     ],
   },
-   'period_1945': {
+  'period_1945': {
     id: 'period_1945',
-    sceneDescription: "Entre 1945 y 1975, la tendencia al calentamiento se detuvo, e incluso hubo un ligero enfriamiento. La causa principal fue un aumento masivo de la contaminación industrial por aerosoles (como los sulfatos) debido al auge económico de la posguerra. Estas partículas reflejaban la luz solar, contrarrestando temporalmente el efecto del aumento de CO2.",
+    sceneDescription: "Entre 1945 y 1975, la tendencia de calentamiento se detuvo, e incluso hubo un ligero enfriamiento. La causa principal fue un aumento masivo de la contaminación industrial por aerosoles (como los sulfatos) debido al auge económico de la posguerra. Estas partículas reflejaban la luz solar, contrarrestando temporalmente el efecto de calentamiento del aumento de los niveles de CO2.",
     chartConfig: { startYear: 1945, endYear: 1975 },
     choices: [
-       { text: "Entonces, ¿la contaminación causó enfriamiento?", nextSceneId: "period_1945_aerosols" },
+       { text: "¿Entonces, la contaminación causó enfriamiento?", nextSceneId: "period_1945_aerosols" },
        { text: "Volver a los temas principales.", nextSceneId: "start" },
     ],
   },
    'period_1945_aerosols': {
     id: 'period_1945_aerosols',
-    sceneDescription: "Exactamente. El efecto de 'oscurecimiento global' de los aerosoles enmascaró el calentamiento subyacente de los gases de efecto invernadero. Sin embargo, a medida que los países aprobaron leyes de 'Aire Limpio' para reducir el smog y la lluvia ácida, el efecto enfriador de los aerosoles disminuyó, permitiendo que el calentamiento por gases de efecto invernadero volviera a ser dominante después de la década de 1970.",
+    sceneDescription: "Exacto. El efecto de 'oscurecimiento global' de los aerosoles enmascaró el calentamiento subyacente de los gases de efecto invernadero. Sin embargo, a medida que los países aprobaron leyes de 'Aire Limpio' para reducir el smog y la lluvia ácida, el efecto de enfriamiento de los aerosoles disminuyó, permitiendo que el calentamiento impulsado por los gases de efecto invernadero volviera a ser dominante después de la década de 1970.",
     chartConfig: { startYear: 1945, endYear: 1975 },
     choices: [
        { text: "Explorar otro período.", nextSceneId: "start" },
@@ -251,36 +275,36 @@ const storyDataEs: StoryData = {
   },
   'period_1975': {
     id: 'period_1975',
-    sceneDescription: "A partir de 1975, comenzó un período de calentamiento rápido y sostenido, a un ritmo aproximadamente el doble que el de principios del siglo XX. Esto se atribuye al efecto dominante del aumento de los gases de efecto invernadero, ya que el efecto enfriador de los aerosoles se redujo por las regulaciones ambientales en muchas naciones industrializadas.",
+    sceneDescription: "A partir de 1975 aproximadamente, comenzó un período de calentamiento rápido y sostenido, a un ritmo aproximadamente el doble que el de principios del siglo XX. Esto se atribuye al efecto dominante del aumento de los gases de efecto invernadero, ya que el efecto de enfriamiento de los aerosoles se redujo gracias a las regulaciones medioambientales en muchas naciones industrializadas.",
     chartConfig: { startYear: 1975, endYear: 2000 },
     choices: [
-       { text: "¿Qué hay del agujero de ozono?", nextSceneId: "period_1975_ozone" },
+       { text: "¿Qué pasa con el agujero de ozono?", nextSceneId: "period_1975_ozone" },
        { text: "¿Cómo saben los científicos que no son ciclos naturales?", nextSceneId: "data_reliability" },
        { text: "Volver a los temas principales.", nextSceneId: "start" },
     ],
   },
   'period_1975_ozone': {
     id: 'period_1975_ozone',
-    sceneDescription: "El agujero de ozono y el calentamiento global son problemas relacionados pero distintos. Los CFC que destruyeron el ozono también son potentes gases de efecto invernadero. El Protocolo de Montreal (1987) eliminó con éxito los CFC para sanar la capa de ozono, lo que también tuvo un efecto secundario positivo, aunque menor, de mitigar parte del calentamiento.",
+    sceneDescription: "El agujero de la capa de ozono y el calentamiento global son cuestiones relacionadas pero distintas. Los CFC que destruyeron el ozono también son potentes gases de efecto invernadero. El Protocolo de Montreal (1987) eliminó con éxito los CFC para sanar la capa de ozono, lo que también tuvo un efecto secundario positivo, aunque menor, de mitigar parte del calentamiento.",
     chartConfig: { startYear: 1975, endYear: 2000 },
     choices: [
-       { text: "Explorar otro período.", nextSceneId: "start" },
-       { text: "Finalizar el análisis.", nextSceneId: "conclusion" },
+       { text: "Explore another period.", nextSceneId: "start" },
+       { text: "End the analysis.", nextSceneId: "conclusion" },
     ],
   },
   'period_2000': {
     id: 'period_2000',
-    sceneDescription: "El siglo XXI ha visto una aceleración del calentamiento. Los 10 años más recientes son los 10 más cálidos registrados. Para 2024, la temperatura global era aproximadamente 1,47°C por encima del promedio preindustrial, impulsada por concentraciones récord de CO2. Este período está marcado por un aumento en la frecuencia e intensidad de los fenómenos meteorológicos extremos.",
+    sceneDescription: "El siglo XXI ha visto una aceleración del calentamiento. Los 10 años más recientes son los 10 más cálidos registrados. Para 2024, la temperatura global estaba aproximadamente 1.47°C por encima del promedio preindustrial, impulsada por concentraciones récord de CO2. Este período está marcado por un aumento en la frecuencia e intensidad de los eventos climáticos extremos.",
     chartConfig: { startYear: 2000, endYear: 2024 },
     choices: [
       { text: "¿Qué fue el 'hiato del calentamiento'?", nextSceneId: "period_2000_hiatus" },
-      { text: "¿Qué nos depara el futuro?", nextSceneId: "conclusion" },
+      { text: "¿Qué depara el futuro?", nextSceneId: "conclusion" },
       { text: "Volver a los temas principales.", nextSceneId: "start" },
     ],
   },
   'period_2000_hiatus': {
     id: 'period_2000_hiatus',
-    sceneDescription: "A principios de la década de 2000, el ritmo del calentamiento superficial pareció ralentizarse ligeramente. Ahora se entiende que este 'hiato' fue el resultado de la variabilidad natural, principalmente una serie de eventos de La Niña y ciclos oceánicos que almacenaron temporalmente más calor en las profundidades del océano. La tendencia de calentamiento a largo plazo nunca se detuvo y se reanudó rápidamente después de 2014.",
+    sceneDescription: "A principios de la década de 2000, el ritmo del calentamiento de la superficie pareció disminuir ligeramente. Ahora se entiende que este 'hiato' es el resultado de la variabilidad natural, principalmente una serie de eventos de La Niña y ciclos oceánicos que almacenaron temporalmente más calor en las profundidades del océano. La tendencia de calentamiento a largo plazo nunca se detuvo y se reanudó rápidamente después de 2014.",
     chartConfig: { startYear: 2000, endYear: 2024 },
     choices: [
        { text: "Explorar otro período.", nextSceneId: "start" },
@@ -289,7 +313,7 @@ const storyDataEs: StoryData = {
   },
   'data_reliability': {
     id: 'data_reliability',
-    sceneDescription: "Los científicos utilizan múltiples conjuntos de datos independientes (de la NASA, NOAA, etc.) que muestran una tendencia de calentamiento consistente. Los primeros datos de 1880 tenían menos cobertura geográfica, pero los investigadores aplican rigurosas correcciones estadísticas para aspectos como cambios en las técnicas de medición y el efecto de 'isla de calor urbana' para garantizar la fiabilidad de los datos.",
+    sceneDescription: "Los científicos utilizan múltiples conjuntos de datos independientes (de la NASA, NOAA, etc.) que muestran una tendencia de calentamiento constante. Los primeros datos de 1880 tenían una menor cobertura geográfica, pero los investigadores aplican correcciones estadísticas rigurosas para cosas como cambios en las técnicas de medición y el efecto de 'isla de calor urbana' para garantizar que los datos sean fiables.",
     chartConfig: { startYear: 1880, endYear: 2024 },
     choices: [
       { text: "Volver a los temas principales.", nextSceneId: "start" },
@@ -298,13 +322,13 @@ const storyDataEs: StoryData = {
   },
   'conclusion': {
     id: 'conclusion',
-    sceneDescription: "Los datos muestran una tendencia innegable al calentamiento desde 1880, que se ha acelerado significativamente desde 1975. Este análisis científico, basado en un vasto cuerpo de evidencia, constituye la base para comprender el clima cambiante de nuestro planeta y la urgente necesidad de actuar. Tu exploración ha finalizado.",
+    sceneDescription: "Los datos muestran una tendencia innegable de calentamiento desde 1880, que se aceleró significativamente después de 1975. Este análisis científico, basado en un vasto cuerpo de evidencia, forma la base para comprender el clima cambiante de nuestro planeta y la urgente necesidad de actuar. Tu exploración ha finalizado.",
     image: GRAPH_OVERVIEW_IMAGE,
     choices: [],
   },
 };
 
 export const storyData = {
-  en: storyDataEn,
-  es: storyDataEs,
+    en: storyDataEn,
+    es: storyDataEs,
 };

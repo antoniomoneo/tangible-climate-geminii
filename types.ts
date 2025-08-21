@@ -30,6 +30,6 @@ export interface StoryHistoryItem {
 }
 
 export interface ChatMessage {
-    role: 'user' | 'aura';
-    content: string;
+  role: 'user' | 'model';
+  content: string;
 }

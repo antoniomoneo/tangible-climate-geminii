@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { GameState, StorySegment, StoryHistoryItem, Language, Choice } from './types';
 import StartScreen from './components/StartScreen';
 import GameScreen from './components/GameScreen';
@@ -40,8 +40,7 @@ const AboutModal: React.FC<{
   );
 };
 
-
-const App: React.FC = () => {
+const MainApp: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>(GameState.START);
   const [gameStateBeforeDashboard, setGameStateBeforeDashboard] = useState<GameState>(GameState.START);
   const [currentStory, setCurrentStory] = useState<StorySegment | null>(null);
@@ -102,7 +101,6 @@ const App: React.FC = () => {
   const handleCloseDashboard = () => {
     setGameState(gameStateBeforeDashboard);
   };
-
 
   const renderContent = () => {
     switch (gameState) {
@@ -171,6 +169,11 @@ const App: React.FC = () => {
        />
     </div>
   );
+};
+
+
+const App: React.FC = () => {
+  return <MainApp />;
 };
 
 export default App;

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Language } from '../types';
 import { locales } from '../locales';
-import { DashboardIcon, AuraIcon, InfoIcon, TangibleDataLogo } from './icons';
+import { DashboardIcon, AuraIcon, InfoIcon, CogIcon, TangibleDataLogo } from './icons';
 
 interface HeaderProps {
   onDashboardClick: () => void;
